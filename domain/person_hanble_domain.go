@@ -11,4 +11,7 @@ type PersonHandle interface {
 
 	UpdatePerson(c *fiber.Ctx) error
 	UpdatePerson_GORM(c *fiber.Ctx) error
+
+	DeletePerson(c *fiber.Ctx) error
+	DeletePerson_GORM(c *fiber.Ctx) error
 }

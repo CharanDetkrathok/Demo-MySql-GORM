@@ -14,4 +14,7 @@ type PersonRepo interface {
 
 	UpdatePerson(newPerson *entity.Person) (sql.Result, error)
 	UpdatePerson_GORM(newPerson *entity.Person) error
+
+	DeletePerson(personID int) (sql.Result, error)
+	DeletePerson_GORM(personID int) error
 }

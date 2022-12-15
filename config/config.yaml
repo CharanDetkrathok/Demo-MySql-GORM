@@ -1,13 +1,13 @@
 demo:
-  # port: ":3000"
-  port: ":3100"
+  port: ":3000"
+  # port: ":3100"
 
 sql-db:
   driver-name: "mysql"
   username: "root"
   password: "#demo#MySQL"
-  hostname: "localhost:3306"
-  # hostname: "mysql-demo:3306"
+  # hostname: "localhost:3306"
+  hostname: "mysql-demo:3306"
   dbname: "demoMySQL"
 
 redis-cache:

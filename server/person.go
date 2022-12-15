@@ -13,4 +13,7 @@ func (server *server) personGroup(app *fiber.App) {
 	app.Put("/person", server.PersonHandle.UpdatePerson)
 	app.Put("/person_gorm", server.PersonHandle.UpdatePerson_GORM)
 
+	app.Delete("/person/:personId", server.PersonHandle.DeletePerson)
+	app.Delete("/person_gorm/:personId", server.PersonHandle.DeletePerson_GORM)
+
 }

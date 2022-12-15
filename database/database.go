@@ -1,18 +1,32 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
+	"time"
 
 	"github.com/go-redis/redis/v9"
 	"github.com/spf13/viper"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 
 	_ "github.com/go-sql-driver/mysql"
 )
 
-type connection struct{}
+type (
+	connection struct{}
+
+	SqlLogger struct {
+		logger.Interface
+	}
+)
+
+func (sqlLog *SqlLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql string, rowsAffected int64), err error) {
+	sqlStatement, _ := fc()
+	fmt.Printf("\n => SQL Statement :: %v \n\n", sqlStatement)
+}
 
 func NewDatabase() *connection {
 	return &connection{}
@@ -58,7 +72,9 @@ func (conn *connection) gormMySqlConnection() (*gorm.DB, error) {
 
 	return gorm.Open(mysql.New(mysql.Config{
 		Conn: sqlDB,
-	}), &gorm.Config{})
+	}), &gorm.Config{
+		Logger: &SqlLogger{},
+	})
 }
 
 func (conn *connection) redisConnection() *redis.Client {

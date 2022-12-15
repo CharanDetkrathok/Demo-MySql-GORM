@@ -39,4 +39,10 @@ const (
 			City= ?
 		WHERE
 			PersonID = ?;`
+
+	deletePerson = `
+	DELETE FROM 
+		Persons
+	WHERE
+		PersonID = ?;`
 )

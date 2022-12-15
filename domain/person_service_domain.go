@@ -14,4 +14,7 @@ type PersonService interface {
 
 	UpdatePerson(newPerson *request.Person) error
 	UpdatePerson_GORM(newPerson *request.Person) error
+
+	DeletePerson(personID int) error
+	DeletePerson_GORM(personID int) error
 }
