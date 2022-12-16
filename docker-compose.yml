@@ -9,37 +9,28 @@ services:
       - ./web-server/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - demo-mysql-gorm
-      - mysql-demo
     ports:
       - 80:80
-
-  mysql-demo :
-    image: mysql:latest
-    container_name: mysql-demo
-    # restart: always
-    volumes:
-      - my-datavolume:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=#demo#MySQL
-      - MYSQL_DATABASE=demoMySQL
-    ports:
-      - 3306:3306
+    networks:
+      - demo-network
 
   demo-mysql-gorm:
     build: 
       context: ./
       dockerfile: Dockerfile
     container_name: demo-mysql-gorm
-    # restart: always
-    depends_on:
-      - mysql-demo
+    restart: always
     ports:
       - 3000:3000
+    networks:
+      - demo-network
 
 volumes:
   my-datavolume:
 
-
+networks:
+  demo-network:
+    external: true
 
 # docker run --name=mysql_demo -e MYSQL_ROOT_PASSWORD=#demo#MySQL -e MYSQL_DATABASE=demoMySQL -p 3306:3306 -d mysql
 # CREATE TABLE Persons (
