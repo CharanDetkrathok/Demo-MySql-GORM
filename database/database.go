@@ -65,6 +65,7 @@ func (conn *connection) mySqlConnection() (*sql.DB, error) {
 
 func (conn *connection) gormMySqlConnection() (*gorm.DB, error) {
 
+	// * ------------ ใช้ *sql.DB ในการเชื่อมต่อกับ GORM ---------------
 	sqlDB, err := conn.mySqlConnection()
 	if err != nil {
 		panic(err)
